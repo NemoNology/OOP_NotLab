@@ -10,53 +10,47 @@ include guard - это особая конструкция, применяема
 ### Пример без использования guard:###
 
 **Файл grandfather.h:**
-'''C++
-struct foo { // Объявление структуры "foo"
-     int member; 
- };
-'''
+
+    struct foo { // Объявление структуры "foo"
+        int member; 
+    };
 
 **Файл father.h:**
-'''C++
-// Подключение файла,
-//в котором объявлена структура 
-#include "grandfather.h" 
-'''
+
+    // Подключение файла,
+    // в котором объявлена структура 
+    #include "grandfather.h" 
 
 **Файл child.c:**
-'''C++
-#include "grandfather.h"
- #include "father.h" // Здесь структура foo объявляется 2-ой раз
-// Это может вызвать ошибку компиляции
-'''
+
+    #include "grandfather.h"
+    #include "father.h" // Здесь структура foo объявляется 2-ой раз
+    // Это может вызвать ошибку компиляции
 
 ### Применение guards:###
 
 **Файл grandfather.h:**
-'''C++
-#ifndef H_GRANDFATHER // Проверка на повторное подключение
-#define H_GRANDFATHER // Если уже подключено, то пропускаем всё,
-// что идёт до #endif
- struct foo {
-     int member;
- };
+
+    #ifndef H_GRANDFATHER // Проверка на повторное подключение
+    #define H_GRANDFATHER // Если уже подключено, то пропускаем всё,
+    // что идёт до #endif
+    struct foo {
+        int member;
+    };
  
- #endif
-'''
+     #endif
 
 **Файл father.h:**
-'''C++
-// Подключение файла,
-//в котором объявлена структура 
-#include "grandfather.h" 
-'''
+
+    // Подключение файла,
+    //в котором объявлена структура 
+    #include "grandfather.h" 
 
 **Файл child.c:**
-'''C++
-#include "grandfather.h"
- #include "father.h" // Здесь структура foo объявляется 2-ой раз
-// С помощью guard ошибки уже не возникнет, ибо будет пропуск повторного объявления
-'''
-
+    
+    #include "grandfather.h"
+    #include "father.h" // Здесь структура foo объявляется 2-ой раз
+    // С помощью guard ошибки уже не возникнет, ибо будет пропуск повторного объявления
+    
 Я считаю, что пример немного утрирован, ибо ошибку можно легко избежать, к сожалению Я не хочу придумывать собственный пример...
-Информация взята с [википедии] (https://ru.wikipedia.org/wiki/Include_guard)
+Информация взята с [википедии](https://ru.wikipedia.org/wiki/Include_guard)
